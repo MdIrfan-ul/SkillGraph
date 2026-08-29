@@ -1,0 +1,25 @@
+{
+  "name": "skillgraph",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dev Collaboration & Skill Network - graph-backed app on CognoDB",
+  "scripts": {
+    "check:connection": "node scripts/check-connection.js",
+    "setup:schema": "node scripts/setup-schema.js",
+    "seed": "ts-node scripts/seed.ts",
+    "api:dev": "npm --prefix backend run start:dev",
+    "ui:dev": "npm --prefix frontend run dev",
+    "ui:build": "npm --prefix frontend run build",
+    "ui:shots": "npm --prefix frontend run --silent screenshot"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "neo4j-driver": "^5.26.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.6.0",
+    "@types/node": "^26.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.7.0"
+  }
+}

@@ -1,0 +1,114 @@
+@import '@fontsource-variable/inter';
+@import 'tailwindcss';
+
+/*
+ * SkillGraph design tokens
+ * Warm paper base, deep-teal accent, warm ink. Trouble with abstract
+ * purple/blue "default" palettes — this reads calmer and more product-like.
+ */
+@theme {
+  --color-paper: #f7f4ec;
+  --color-surface: #ffffff;
+  --color-ink: #211c14;
+  --color-ink-soft: #4f493e;
+  --color-muted: #847b6c;
+  --color-line: #e7e1d4;
+  --color-line-strong: #d9d1c0;
+
+  --color-accent: #0e7a66;
+  --color-accent-strong: #0a5f50;
+  --color-accent-soft: #e2f1ec;
+  --color-accent-line: #bfe0d5;
+
+  --color-gold: #b0711c;
+  --color-gold-soft: #fbf1de;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(33 28 20 / 0.04), 0 6px 20px -12px rgb(33 28 20 / 0.18);
+  --shadow-pop: 0 12px 40px -12px rgb(33 28 20 / 0.28);
+
+  --radius-card: 1rem;
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    background-image: radial-gradient(
+      1200px 500px at 50% -160px,
+      rgb(14 122 102 / 0.09),
+      transparent 70%
+    );
+  }
+
+  ::selection {
+    background: rgb(14 122 102 / 0.22);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-surface border border-line rounded-card shadow-card;
+  }
+
+  .prose-sm-soft {
+    @apply text-ink-soft leading-relaxed;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-line-strong bg-surface px-4 py-2.5 text-[15px] text-ink placeholder:text-muted/70 transition-colors;
+  }
+
+  .field:focus {
+    @apply border-accent outline-none;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line-strong bg-surface px-4 py-2.5 text-[15px] font-semibold text-ink-soft transition-colors hover:border-accent hover:text-accent;
+  }
+}
+
+/* Skeleton shimmer */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #ece7dc;
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.55),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}
